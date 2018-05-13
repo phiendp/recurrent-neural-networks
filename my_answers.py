@@ -6,6 +6,10 @@ from keras.layers import LSTM
 import keras
 
 
+ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+PUNCTUATION = [' ', '!', ',', '.', ':', ';', '?']
+
+
 def window_transform_series(series, window_size):
     # containers for input/output pairs
     X = []
@@ -32,11 +36,10 @@ def build_part1_RNN(window_size):
     return model
 
 
-### TODO: return the tex input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
-    punctuation = ['!', ',', '.', ':', ';', '?']
+    char_set = ''.join(PUNCTUATION) + ALPHABET
+    return ''.join([c for c in text if c in char_set])
 
-    return text
 
 ### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_text(text, window_size, step_size):
